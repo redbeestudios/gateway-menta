@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: operations
+      author: cristian.villarroel
+      changes:
+        - createTable:
+            tableName: operations
+            columns:
+              - column:
+                  name: operation_id
+                  type: java.sql.Types.VARCHAR(36)
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: operation_type
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: operation_datetime
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_id
+                  type: java.sql.Types.VARCHAR(36)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: operations_transaction_id_fk
+      author: cristian.villarroel
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: transaction_id
+            baseTableName: operations
+            constraintName: fk_operations_transaction
+            referencedColumnNames: transaction_id
+            referencedTableName: transactions

@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: credibanco_response_operations
+      author: nicolas.ocampo
+      changes:
+        - createTable:
+            tableName: response_operations
+            columns:
+              - column:
+                  name: id
+                  type: java.sql.Types.VARCHAR(36)
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: retrieval_reference_number
+                  type: java.sql.Types.VARCHAR(20)
+              - column:
+                  name: authorization_code
+                  type: java.sql.Types.VARCHAR(20)
+              - column:
+                  name: response_code
+                  type: java.sql.Types.VARCHAR(20)
+              - column:
+                  name: card_type_response_code
+                  type: java.sql.Types.VARCHAR(20)
+              - column:
+                  name: receiving_institution_idenfication_code
+                  type: java.sql.Types.VARCHAR(20)
+              - column:
+                  name: settlement_data
+                  type: java.sql.Types.VARCHAR(20)
+
+

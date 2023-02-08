@@ -1,0 +1,92 @@
+spring.application.name: api-reimbursements
+
+spring:
+
+  kafka:
+    bootstrap-servers: ${KAFKA_SERVERS}
+    listener:
+      ack-mode: "manual_immediate"
+      missing-topics-fatal: false
+    consumer:
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  cloud:
+    config:
+      import-check:
+        enabled: false
+  jackson:
+    date-format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: NON_NULL
+  datasource:
+    url: jdbc:mariadb://${MYSQL_HOST}:3306/${MYSQL_DB}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASS}
+    driver-class-name: org.mariadb.jdbc.Driver
+    initialization-mode: always
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+        jdbc:
+          time_zone: UTC
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:db/liquibase-changelog.yml
+    enabled: true
+
+springdoc:
+  api-docs:
+    path: ${APP_PATH}/swagger-ui/api-docs
+  swagger-ui:
+    path: ${APP_PATH}/index.html
+
+event:
+  topic:
+    reimbursements:
+      created-annulment: created.annulments
+      created-refund: created.refund
+  group:
+    persist:
+      refund: persist.refund
+      annulment: persist.annulment
+
+externals:
+  host: "api-internal.dev.apps.menta.global"
+  scheme: "https://"
+  entities:
+    acquirer:
+      annulments:
+          url: "${externals.scheme}${externals.host}${externals.entities.acquirer.annulments.path}"
+          path: "/acquirers/annulments"
+      refunds:
+          url: "${externals.scheme}${externals.host}${externals.entities.acquirer.refunds.path}"
+          path: "/acquirers/refunds"
+      request-timeout: "25500"
+    customers:
+      url: "${externals.scheme}${externals.host}${externals.entities.customers.path}"
+      request-timeout: 3000
+      path: "/customers/{customerId}"
+    terminals:
+      url: "${externals.scheme}${externals.host}${externals.entities.terminals.path}"
+      request-timeout: 3000
+      path: "/terminals/{terminalId}"
+    merchants:
+      url: "${externals.scheme}${externals.host}${externals.entities.merchants.path}"
+      request-timeout: 3000
+      path: "/merchants/{merchantId}"
+    transactions:
+      url: "${externals.scheme}${externals.host}${externals.entities.transactions.path}"
+      path: "/transactions"
+      request-timeout: 3000
+
+management:
+  health:
+    db:
+      enabled: false

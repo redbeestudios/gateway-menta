@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: updateValue-type
+      author: Franco Scolari
+      changes:
+        -  update:
+             columns:
+               -  column:
+                    name:  type
+                    value:  ACQUIRER
+             tableName:  transactions
+             where:  type=''

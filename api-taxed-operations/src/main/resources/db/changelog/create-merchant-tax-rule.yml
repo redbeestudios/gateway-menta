@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: merchant_tax_rule
+      author: nicolas.ocampo
+      changes:
+        - createTable:
+            tableName: merchant_tax_rule
+            columns:
+              - column:
+                  name: taxed_operation_id
+                  type: java.sql.Types.INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_rule_id
+                  type: java.sql.Types.VARCHAR(36)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: merchant_tax_rule_taxed_operation_id_fk
+      author: nicolas.ocampo
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: taxed_operation_id
+            baseTableName: merchant_tax_rule
+            constraintName: fk_merchant_tax_rule_taxed_operation_id
+            referencedColumnNames: id
+            referencedTableName: taxed_operation
+
+  - changeSet:
+      id: merchant_tax_rule_tax_rule_id_fk
+      author: nicolas.ocampo
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: tax_rule_id
+            baseTableName: merchant_tax_rule
+            constraintName: fk_merchant_tax_rule_tax_rule_id
+            referencedColumnNames: tax_id
+            referencedTableName: tax_rule
+
+  - changeSet:
+      id: merchant_tax_rule_pk
+      author: nicolas.ocampo
+      changes:
+        - addPrimaryKey:
+            columnNames: taxed_operation_id, tax_rule_id
+            constraintName: pk_merchant_tax_rule
+            tableName: merchant_tax_rule
+
+
+

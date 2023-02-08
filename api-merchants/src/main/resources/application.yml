@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: api-merchants
+    path: ${APP_PATH}
+
+  cloud:
+    config:
+      import-check:
+        enabled: false
+
+  data:
+    mongodb:
+      uri: ${MONGO_URL}
+      auto-index-creation: true
+      uuid-representation: standard
+  jackson:
+    date-format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: NON_NULL
+    deserialization:
+      ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
+
+springdoc:
+  api-docs:
+    path: ${APP_PATH}/swagger-ui/api-docs
+  swagger-ui:
+    path: ${APP_PATH}/index.html
+
+acquirers:
+  operable:
+    - id: "GPS"
+    - id: "BANORTE"
+
+elastic:
+  apm:
+    enabled: true
+    server-url: ${ELASTIC_CLOUD_URL}
+    service-name: ${ELASTIC_CLOUD_TAG_APP}
+    secret-token: ${ELASTIC_CLOUD_TOKEN}
+    environment: ${ELASTIC_CLOUD_TAG_ENV}
+    application-packages: com.menta.api.merchants
+    log-level: ERROR

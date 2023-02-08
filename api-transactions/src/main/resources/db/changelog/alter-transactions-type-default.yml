@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: addDefaultValue-type
+      author: Franco Scolari
+      changes:
+        - addDefaultValue:
+            tableName: transactions
+            columnName: type
+            defaultValue: ACQUIRER

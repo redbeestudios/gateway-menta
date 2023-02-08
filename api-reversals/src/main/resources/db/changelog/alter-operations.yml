@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: rename column payment_id to operation_id
+      author: Francisco Gonzalez
+      changes:
+        - renameColumn:
+            columnDataType: java.sql.Types.VARCHAR(50)
+            newColumnName: original_operation_id
+            oldColumnName: payment_id
+            schemaName: db-reversals
+            tableName: operations

@@ -1,0 +1,405 @@
+{
+	"info": {
+		"_postman_id": "082a1495-c075-43f0-a26a-82abae56f588",
+		"name": "Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20397271"
+	},
+	"item": [
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "Assign Group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Payment::Create\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/private/users/{{assign-group.email}}/type/{{assign-group.type}}/groups",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"private",
+								"users",
+								"{{assign-group.email}}",
+								"type",
+								"{{assign-group.type}}",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List groups for user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.to.have.status(200)) {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.globals.set(\"globals.list-groups.next\", jsonData.metadata.next)",
+									"",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/private/users/{{assign-group.email}}/type/{{assign-group.type}}/groups?limit=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"private",
+								"users",
+								"{{assign-group.email}}",
+								"type",
+								"{{assign-group.type}}",
+								"groups"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List groups for user Next page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.to.have.status(200)) {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.globals.set(\"globals.list-groups.next\", jsonData.metadata.next)",
+									"",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/private/users/{{assign-group.email}}/type/{{assign-group.type}}/groups?limit=1&next={{globals.list-groups.next}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"private",
+								"users",
+								"{{assign-group.email}}",
+								"type",
+								"{{assign-group.type}}",
+								"groups"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "next",
+									"value": "{{globals.list-groups.next}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_type\": \"{{create-type}}\",\n    \"attributes\": {\n        \"email\": \"{{create-email}}\",\n        \"merchant_id\": \"{{create-merchantId}}\",\n        \"customer_id\": \"{{create-customerId}}\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/private/users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"private",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/private/users/{email}/type/{type}/forgot-password",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"private",
+						"users",
+						"{email}",
+						"type",
+						"{type}",
+						"forgot-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm Forgot Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"{{code}}\",\n    \"password\": \"{{password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/private/users/{email}/type/{type}/confirm-forgot-password",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"private",
+						"users",
+						"{email}",
+						"type",
+						"{type}",
+						"confirm-forgot-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/private/users/{{create-email}}/type/{{create-type}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"private",
+						"users",
+						"{{create-email}}",
+						"type",
+						"{{create-type}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if(pm.response.to.have.status(200)) {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    pm.globals.set(\"globals.list-users.next\", jsonData.metadata.next)",
+							"",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/private/users/type/{{create-type}}?limit=1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"private",
+						"users",
+						"type",
+						"{{create-type}}"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List next page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/private/users/type/{{create-type}}?limit=1&next={{globals.list-users.next}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"private",
+						"users",
+						"type",
+						"{{create-type}}"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						},
+						{
+							"key": "next",
+							"value": "{{globals.list-users.next}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/private/users/{{create-email}}/type/{{create-type}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"private",
+						"users",
+						"{{create-email}}",
+						"type",
+						"{{create-type}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

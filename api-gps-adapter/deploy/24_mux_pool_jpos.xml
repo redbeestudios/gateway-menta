@@ -1,0 +1,4 @@
+<mux class="org.jpos.q2.iso.MUXPool" logger="Q2" name="jpos_muxpool">
+    <muxes>jpos-mux jpos-mux-02 jpos-mux-03</muxes>
+    <strategy>primary-secondary</strategy>
+</mux>

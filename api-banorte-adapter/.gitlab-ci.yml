@@ -1,0 +1,74 @@
+# This is the Gradle build system for JVM applications
+# https://gradle.org/
+# https://github.com/gradle/gradle
+
+image: gradle:alpine
+stages:
+  - check
+  - build
+  - package
+  - deploy
+
+# Disable the Gradle daemon for Continuous Integration servers as correctness
+# is usually a priority over speed in CI environments. Using a fresh
+# runtime for each build is more reliable since the runtime is completely
+# isolated from any previous builds.
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+test:
+  stage: check
+  script: ./gradlew check
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build
+      - .gradle
+  artifacts:
+    when: always
+    reports:
+      junit: build/test-results/test/**/TEST-*.xml
+
+
+build:
+  stage: build
+  script:
+    - ./gradlew --build-cache assemble
+    - echo "APP_NAME=$(./gradlew properties --console=plain -q | grep '^name:' | sed -e 's/\w*:\s//g')" >> build.env
+    - echo "APP_VERSION=$(./gradlew properties --console=plain -q | grep '^version:' | sed -e 's/\w*:\s//g')" >> build.env
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - build
+      - .gradle
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    reports:
+      dotenv: build.env
+
+docker:
+  # Use the official docker image.
+  image: docker:latest
+  stage: package
+
+  variables:
+    DOCKER_DRIVER: overlay
+
+  dependencies:
+    - build
+
+  before_script:
+    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login --password-stdin --username "$DOCKER_REGISTRY_USER" $DOCKER_REGISTRY
+
+  script: 
+    - docker build --build-arg version="$APP_VERSION" --build-arg appName=$APP_NAME -t "$DOCKER_REGISTRY/$CI_PROJECT_ROOT_NAMESPACE/$APP_NAME:$APP_VERSION" .
+    - docker push "$DOCKER_REGISTRY/$CI_PROJECT_ROOT_NAMESPACE/$APP_NAME:$APP_VERSION"
+  
+  rules:
+    - if: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH)

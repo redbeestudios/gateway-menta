@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: taxes_rules
+      author: nicolas.ocampo
+      changes:
+        - createTable:
+            tableName: tax_rule
+            columns:
+              - column:
+                  name: tax_id
+                  type: java.sql.Types.VARCHAR(36)
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: percentage
+                  type: java.sql.Types.DECIMAL(10,4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fiscal_condition
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country
+                  type: java.sql.Types.VARCHAR(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payment_method
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: java.sql.Types.VARCHAR(36)
+                  constraints:
+                    nullable: false
+
+
+

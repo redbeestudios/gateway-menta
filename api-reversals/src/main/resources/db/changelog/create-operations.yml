@@ -1,0 +1,160 @@
+databaseChangeLog:
+  - changeSet:
+      id: operations
+      author: Menta
+      changes:
+        - createTable:
+            tableName: operations
+            columns:
+              - column:
+                  name: operation_id
+                  type: java.sql.Types.VARCHAR(36)
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: payment_id
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: type
+                  type: java.sql.Types.VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: acquirer_id
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: authorization_code
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: display_message
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: status_code
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: situation_code
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: situation_message
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: merchant_id
+                  type: java.sql.Types.VARCHAR(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: java.sql.Types.VARCHAR(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: terminal_id
+                  type: java.sql.Types.VARCHAR(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: trace
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ticket
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: batch
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: installments
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: identity_type
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: identity_number
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: input_mode
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: card_holder_name
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: card_brand
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: card_bank
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: card_type
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: card_pan
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: tip
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: advance
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: operation_datetime
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_datetime
+                  type: DATETIME
+                  constraints:
+                    nullable: false

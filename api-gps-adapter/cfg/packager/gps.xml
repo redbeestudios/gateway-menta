@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE isopackager SYSTEM "genericpackager.dtd">
+
+<isopackager>
+    <isofield id="0" length="4" name="MESSAGE TYPE INDICATOR" pad="false" class="org.jpos.iso.IFB_NUMERIC"/>
+    <!--
+    	Formato:AN 16.
+    				02  SECNDRY-BIT-MAPPIC X(16)
+	-->
+    <isofield id="1" length="16" name="BINARY BIT MAP" class="org.jpos.iso.IFB_BITMAP"/>
+    <isofield id="2" length="20" name="PAN - PRIMARY ACCOUNT NUMBER" pad="true" class="org.jpos.iso.IFB_LLNUM"/>
+    <!--
+         Formato:AN 6
+                 02 PROC-CDE.
+                 04  TRAN-CDEPIC X(2).
+                 04  FROM-ACCT-TYPPIC X(2).
+                 04  TO-ACCT-TYPPIC X(2
+     -->
+    <isofield id="3" length="6" name="PROCESSING CODE" pad="false" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="4" length="12" name="AMOUNT, TRANSACTION" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="5" length="12" name="PRODUCT BALANCE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="6" length="12" name="AMOUNT DUE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <!--
+        Formato:N 10 ( MMDDhhmmss )
+        02  XMIT-DAT-TIM PIC X(10).
+    -->
+    <isofield id="7" length="10" name="TRANSMISSION DATE AND TIME" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="8" length="8" name="AMOUNT, CARDHOLDER BILLING FEE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="9" length="8" name="CONVERSION RATE, SETTLEMENT" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="10" length="8" name="CONVERSION RATE, CARDHOLDER BILLING" pad="true"
+              class="org.jpos.iso.IFB_NUMERIC"/>
+    <!--
+    	Formato:N 6
+    			02  TRACE-NUM PIC X(6).
+     -->
+    <isofield id="11" length="6" name="SYSTEM TRACE AUDIT NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <!-- Standard-breaker here, too: implemented as 12 - not standard of 6 -->
+    <!--
+        Formato:N 6 ( hhmmss )
+                02  TRAN-TIM PIC X(6).
+     -->
+    <isofield id="12" length="6" name="TIME, LOCAL TRANSACTION" pad="false" class="org.jpos.iso.IFB_NUMERIC"/>
+    <!--
+    	Formato:N 4 ( MMDD )
+    			02  TRAN-DAT PIC X(4).
+     -->
+    <isofield id="13" length="4" name="DATE, LOCAL TRANSACTION" pad="false" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="14" length="4" name="DATE, EXPIRATION" pad="false" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="15" length="4" name="DATE, SETTLEMENT" pad="false" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="16" length="4" name="DATE, CONVERSION" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <!--
+       Formato:N 4 ( MMDD )
+               02  CAP-DAT PIC X(4).
+    -->
+    <isofield id="17" length="4" name="DATE, BUSINESS" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <!--
+    	Formato:N 4
+    			02  MRCHT-TYP-CDE PIC X(4).
+     -->
+    <isofield id="18" length="4" name="MERCHANTS TYPE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="19" length="3" name="ACQUIRING INSTITUTION COUNTRY CODE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="20" length="3" name="PAN EXTENDED COUNTRY CODE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="21" length="3" name="LIFECYCLE IDENTIFER" pad="true" class="org.jpos.iso.IFB_LLCHAR"/>
+    <isofield id="22" length="3" name="POINT OF SERVICE DATA CODE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="23" length="3" name="CARD SEQUENCE NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="24" length="3" name="FUNCTION CODE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <!--
+    	Formato:N 2
+    			02  PT-TRAN-SPCL-CDE PIC X(2).
+     -->
+    <isofield id="25" length="2" name="POINT OF SERVICE CONDITION CODE" pad="false" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="26" length="2" name="MERCHANT CATEGORY CODE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="27" length="1" name="POS ENTRY MODE CONDITION CODE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="28" length="9" name="AMOUNT, TRANSACTION FEE" pad="true" class="org.jpos.iso.IFB_AMOUNT"/>
+    <isofield id="29" length="9" name="AMOUNT, SETTLEMENT FEE" pad="true" class="org.jpos.iso.IFB_AMOUNT"/>
+    <isofield id="30" length="9" name="AMOUNT, ORIGINAL" pad="true" class="org.jpos.iso.IFB_AMOUNT"/>
+    <isofield id="31" length="9" name="ACQUIRER REFERENCE DATA" class="org.jpos.iso.IFB_AMOUNT"/>
+    <!--
+    	Formato:N..11
+    			02  ACQ-INST-ID.
+    			04  LENPIC X(2).
+    			04  NUMPIC X(11).
+     -->
+    <isofield id="32" length="11" name="ACQUIRING INSTITUTION IDENT CODE" pad="false" class="org.jpos.iso.IFB_AMOUNT"/>
+    <isofield id="33" length="11" name="FORWARDING INSTITUTION IDENT CODE" pad="false" class="org.jpos.iso.IFB_LLNUM"/>
+    <isofield id="34" length="28" name="PAN EXTENDED" class="org.jpos.iso.IFB_LLCHAR"/>
+    <!--
+        Formato:ANS..37
+                02  TRACK2.
+                04  LENPICX(2).
+                04  DATAPIC X(37).
+     -->
+    <isofield id="35" length="37" name="TRACK 2 DATA" pad="false" class="org.jpos.iso.IFB_LLNUM"/>
+    <isofield id="36" length="104" name="TRACK 3 DATA" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <!--
+        Formato:AN 12  ( Justificado con ceros a la izquierda )
+                02  RETRVL-REF-NUM. PIC x(12)
+     -->
+    <isofield id="37" length="12" name="RETRIEVAL REFERENCE NUMBER" pad="false" class="org.jpos.iso.IF_CHAR"/>
+    <!--
+    	Formato:AN 6
+    			02  AUTH-ID-RESP PIC X(6).
+    -->
+    <isofield id="38" length="6" name="AUTHORIZATION IDENTIFICATION RESPONSE" pad="true" class="org.jpos.iso.IF_CHAR"/>
+    <!-- Totally off the map here with 20-byte Auth ID -->
+    <!--
+    	Formato:AN 2
+    			02  RESP-CDE PIC X(2).
+     -->
+    <isofield id="39" length="2" name="RESPONSE CODE" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="40" length="3" name="SERVICE RESTRICTION CODE" class="org.jpos.iso.IF_CHAR"/>
+    <!--
+    	Formato:ANS 16
+    			02  TERM-ID PIC X(16).
+     -->
+    <isofield id="41" length="8" name="CARD ACCEPTOR TERMINAL IDENTIFICACION" pad="false" class="org.jpos.iso.IF_CHAR"/>
+    <!--
+        Formato:ANS 15
+                02  CRD-ACCPT-ID-CDE PIC X(15).
+     -->
+    <isofield id="42" length="15" name="CARD ACCEPTOR IDENTIFICATION CODE" pad="false" class="org.jpos.iso.IF_CHAR"/>
+    <!--
+    	Formato:ANS 40
+    			02  CRD-ACCPT-NAME-LOC.
+    			04  TERM-OWNERPIC X(22).
+    			04  TERM-CITYPIC X(13).
+    			04  TERM-STPIC X(03).
+    			04  TERM-CNTRYPIC X(02).
+     -->
+    <isofield id="43" length="40" name="CARD ACCEPTOR NAME/LOCATION" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="44" length="25" name="REQUEST AND RESPONSE RECORD COUNT" class="org.jpos.iso.IFB_LLCHAR"/>
+    <isofield id="45" length="76" name="TRACK 1 DATA" pad="false" class="org.jpos.iso.IFB_LLCHAR"/>
+    <isofield id="46" length="999" name="TERMS AND CONDITIONS RESPONSE DATA" pad="false"
+              class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="47" length="999" name="TENDER TYPE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <!--
+       Formato:ANS 30
+               02  LEN PIC 9(3).
+               02  POS.
+                   02  RETL-ID PIC X(19).
+                   02  RETL-GRP PIC X(4).
+                   02  RETL-REGN PIC X(4).
+    -->
+    <isofield id="48" length="16" name="TRANSACTION HISTORY DETAIL" pad="false" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <!--
+        Formato:N 3
+                02  CRNCY-CDEPIC X(03).
+     -->
+    <isofield id="49" length="3" name="CURRENCY CODE, TRANSACTION" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="50" length="3" name="CURRENCY CODE, SETTLEMENT" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="51" length="3" name="CURRENCY CODE, CARDHOLDER BILLING" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="52" length="16" name="PIN DATA" class="org.jpos.iso.IFB_HEX"/>
+    <isofield id="53" length="16" name="KSN" pad="false" class="org.jpos.iso.IFB_HEX"/>
+    <isofield id="54" length="12" name="PRODUCT IDENTIFICATION DATA" pad="false" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="55" length="999" name="INTEGRATED CARD CIRCUIT SYSTEM RELATED DATA" pad="false"
+              class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="56" length="999" name="ORIGINAL DATA ELEMENTS" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="57" length="999" name="AUTHORIZATION LIFE CYCLE CODE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="58" length="999" name="AUTHORIZING AGENT INSTITUTION IDENTIFICATION CODE"
+              class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="59" length="999" name="INDICADORES VARIOS" pad="false" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <!--
+    	Formato: ANS 19  ( POS )
+    			02  PRI-RSRVD1-PRVT.
+    			04 LENPIC X(03).
+    				04 POS.
+		    			06 TERM-FIIDPIC X(04).
+		    			06 TERM-LNPIC X(04).
+		    			06 TERM-TIME-OFSTPIC X(04).
+		    			06 PSEUDO-TERM-IDPIC X(04)
+     -->
+    <isofield id="60" length="11" name="VERSION APLICACION" pad="false" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <!--
+        Formato: ANS 22  ( POS )
+                02  PRI-RSRVD2-PRVT.
+                    04 LENPIC X(03).
+                    04 POS.
+                        06 CRD-FIIDPIC X(04).
+                        06 CRD-LNPIC X(04).
+                        06 CATEGORYPIC X(01).
+                        06 SAVE-ACCT-TYPPIC X(02).
+                        06 ICHG-RESPPIC X(08).
+     -->
+    <isofield id="61" length="5" name="TIPO DE TERMINAL/POS" pad="false" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="62" length="7" name="INFORMACION DE TICKETS" pad="false" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="63" length="999" name="INFORMACION ADICIONAL" pad="false" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="64" length="8" name="MESSAGE AUTHENTICATION CODE FIELD" class="org.jpos.iso.IFB_BINARY"/>
+    <isofield id="65" length="1" name="BITMAP, EXTENDED" class="org.jpos.iso.IFB_BINARY"/>
+    <isofield id="66" length="1" name="SETTLEMENT CODE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="67" length="2" name="EXTENDED PAYMENT CODE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="68" length="3" name="RECEIVING INSTITUTION COUNTRY CODE" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="69" length="3" name="SETTLEMENT INSTITUTION COUNTRY CODE" pad="true"
+              class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="70" length="3" name="NETWORK MANAGEMENT INFORMATION CODE" pad="true"
+              class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="71" length="4" name="MESSAGE NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="72" length="4" name="MESSAGE NUMBER LAST" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="73" length="6" name="DATE ACTION" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="74" length="10" name="CREDITS NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="75" length="10" name="CREDITS REVERSAL NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="76" length="10" name="DEBITS NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="77" length="10" name="DEBITS REVERSAL NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="78" length="10" name="TRANSFER NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="79" length="10" name="TRANSFER REVERSAL NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="80" length="10" name="INQUIRIES NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="81" length="10" name="AUTHORIZATION NUMBER" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="82" length="12" name="CREDITS, PROCESSING FEE AMOUNT" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="83" length="12" name="CREDITS, TRANSACTION FEE AMOUNT" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="84" length="12" name="DEBITS, PROCESSING FEE AMOUNT" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="85" length="12" name="DEBITS, TRANSACTION FEE AMOUNT" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="86" length="16" name="CREDITS, AMOUNT" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="87" length="16" name="CREDITS, REVERSAL AMOUNT" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="88" length="16" name="DEBITS, AMOUNT" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="89" length="16" name="DEBITS, REVERSAL AMOUNT" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="90" length="42" name="ORIGINAL DATA ELEMENTS" pad="true" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="91" length="1" name="FILE UPDATE CODE" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="92" length="2" name="FILE SECURITY CODE" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="93" length="5" name="RESPONSE INDICATOR" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="94" length="7" name="SERVICE INDICATOR" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="95" length="42" name="REPLACEMENT AMOUNTS" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="96" length="16" name="MESSAGE SECURITY CODE" class="org.jpos.iso.IFB_BINARY"/>
+    <isofield id="97" length="17" name="AMOUNT, NET SETTLEMENT" pad="false" class="org.jpos.iso.IFB_AMOUNT"/>
+    <isofield id="98" length="25" name="PAYEE" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="99" length="11" name="SETTLEMENT INSTITUTION IDENT CODE" pad="false" class="org.jpos.iso.IFB_LLNUM"/>
+    <isofield id="100" length="11" name="RECEIVING INSTITUTION IDENT CODE" pad="false" class="org.jpos.iso.IFB_LLNUM"/>
+    <isofield id="101" length="17" name="FILE NAME" class="org.jpos.iso.IFB_LLCHAR"/>
+    <isofield id="102" length="28" name="ACCOUNT IDENTIFICATION" class="org.jpos.iso.IFB_LLCHAR"/>
+    <isofield id="103" length="28" name="TARGET CARD NUMBER" class="org.jpos.iso.IFB_LLCHAR"/>
+    <isofield id="104" length="100" name="CARD STATUS" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="105" length="999" name="RESERVED ISO USE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="106" length="999" name="RESERVED ISO USE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="107" length="999" name="RESERVED ISO USE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="108" length="999" name="MBA PAYLOAD OVERFLOW" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="109" length="999" name="MBA PAYLOAD OVERFLOW" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="110" length="999" name="MBA PAYLOAD OVERFLOW" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="111" length="999" name="MBA PAYLOAD" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="112" length="999" name="QUALIFYING BONUS POINTS" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="113" length="999" name="CURRENT BONUS POINTS" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="114" length="999" name="REWARDS POINTS PENDING" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="115" length="999" name="TARGET CARD STATUS" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="116" length="999" name="TARGET CARD SERIAL NUMBER" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="117" length="999" name="TARGET CARD BALANCE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="118" length="999" name="TARGET CARD PRODUCT DESCRIPTION" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="119" length="999" name="TARGET CARD DATE, ACTION" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="120" length="999" name="TARGET CARD DATE, EXPIRATION" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="121" length="999" name="DIGITAL DELIVERY TRANSACTION RESPONSE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="122" length="999" name="RESERVED PRIVATE USE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <!--
+    	Formato:ANS 23
+    			02  SECNDRY-RSRVD4-PRVT.
+    				04  LEN PIC X(03).
+    				04  INVOICE-NUM PIC X(10).
+    				04  ORIG-INVOICE-NUM PIC X(10)
+     -->
+    <isofield id="123" length="999" name="RESERVED PRIVATE USE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <!--
+        Formato:ANS 12
+                02  SECNDRY-RSRVD5-PRVT.
+                    04  LEN PIC X(03).
+                    04  BATCH-SEQ-NUM PIC X(03).
+                    04  BATCH-NUM PIC X(03).
+                    04  SHIFT-NUM PIC X(03).
+     -->
+    <isofield id="124" length="999" name="INFO TEXT" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="125" length="999" name="RESERVED PRIVATE USE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="126" length="999" name="RESERVED PRIVATE USE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="127" length="999" name="RESERVED PRIVATE USE" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="128" length="8" name="MAC 2" class="org.jpos.iso.IFB_BINARY"/>
+</isopackager>

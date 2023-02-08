@@ -1,0 +1,4 @@
+include:
+  - project: 'backend/utils/template-pipeline'
+    file: '.template-ci-kotlin.yml'
+    ref: 'main'

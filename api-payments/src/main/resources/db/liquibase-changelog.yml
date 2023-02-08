@@ -1,0 +1,9 @@
+databaseChangeLog:
+- include:
+    file: db/changelog/create-operations.yml
+- include:
+    file: db/changelog/update-column-situation-nullable.yml
+- include:
+    file: db/changelog/alter-operations-add-ticket_id.yml
+- include:
+    file: db/changelog/alter-operations-add-origin.yml

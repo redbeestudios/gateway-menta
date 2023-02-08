@@ -1,0 +1,61 @@
+spring.application.name: api-gps-adapter
+
+spring:
+  cloud:
+    config:
+      import-check:
+        enabled: false
+  profiles:
+    active: dev
+  jackson:
+    date-format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: NON_NULL
+    deserialization:
+      ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
+
+springdoc:
+  api-docs:
+    path: ${APP_PATH}/swagger-ui/api-docs
+  swagger-ui:
+    path: ${APP_PATH}/index.html
+
+api-gp-adapter:
+  global:
+    constants:
+      audit-number: "005069"
+      network-international-identifier: "012"
+      point-of-service-condition-code: "00"
+      handbook-version: "200"
+      hardware-version: "abc123"
+  adapter:
+    out:
+      request-timeout: "25000"
+
+externals:
+  host: "api-internal.dev.apps.menta.global"
+  scheme: "https://"
+  entities:
+    acquirer:
+      customer:
+        path: "/customers/{customerId}/acquirers/{acquirerId}"
+        url: "${externals.scheme}${externals.host}${externals.entities.acquirer.customer.path}"
+        request-timeout: 5000
+      merchant:
+        path: "/merchants/{merchantId}/acquirers/{acquirerId}"
+        url: "${externals.scheme}${externals.host}${externals.entities.acquirer.merchant.path}"
+        request-timeout: 5000
+      terminal:
+        path: "/terminals/{terminalId}/acquirers/{acquirerId}"
+        url: "${externals.scheme}${externals.host}${externals.entities.acquirer.terminal.path}"
+        request-timeout: 5000
+
+elastic:
+  apm:
+    enabled: false
+    server-url: ${ELASTIC_CLOUD_URL}
+    service-name: ${ELASTIC_CLOUD_TAG_APP}
+    secret-token: ${ELASTIC_CLOUD_TOKEN}
+    environment: ${ELASTIC_CLOUD_TAG_ENV}
+    application-packages: com.kiwi.api.payments
+    log-level: ERROR

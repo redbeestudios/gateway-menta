@@ -1,0 +1,6 @@
+<mux class="org.jpos.q2.iso.QMUX" logger="Q2" name="jpos-mux-03">
+    <key>41 11</key>
+    <in>jpos-receive-03</in>
+    <out>jpos-send-03</out>
+    <ready>jpos-channel-03.ready</ready>
+</mux>

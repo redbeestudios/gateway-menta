@@ -1,0 +1,22 @@
+databaseChangeLog:
+- include:
+    file: db/changelog/create-transactions.yml
+- include:
+    file: db/changelog/create-operations.yml
+- include:
+    file: db/changelog/alter-operations.yml
+- include:
+    file: db/changelog/alter-transactions.yml
+- include:
+    file: db/changelog/alter-transactions-type.yml
+- include:
+    file: db/changelog/alter-transactions-nullable-card.yml
+- include:
+    file: db/changelog/alter-transactions-type-default.yml
+- include:
+    file: db/changelog/alter-transactions-type-acquirer.yml
+- include:
+    file: db/changelog/alter-operations-status.yml
+- include:
+    file: db/changelog/alter-operations-add-ticket_id.yml
+

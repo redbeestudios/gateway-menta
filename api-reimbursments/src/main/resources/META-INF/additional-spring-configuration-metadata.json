@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "acquirer.annulment.url",
+      "type": "java.lang.String",
+      "description": "Description for acquirer.annulment.url."
+  }
+] }

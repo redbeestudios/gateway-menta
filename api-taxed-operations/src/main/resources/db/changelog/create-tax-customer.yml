@@ -1,0 +1,81 @@
+databaseChangeLog:
+  - changeSet:
+      id: tax-customer
+      author: nicolas.ocampo
+      changes:
+        - createTable:
+            tableName: tax_customer
+            columns:
+              - column:
+                  name: id
+                  type: java.sql.Types.INTEGER
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: taxed_amount
+                  type: java.sql.Types.DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: iva
+                  type: java.sql.Types.DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ganancias
+                  type: java.sql.Types.DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: commission
+                  type: java.sql.Types.DECIMAL(10,4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gross_commission
+                  type: java.sql.Types.DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gross_commission_with_tax
+                  type: java.sql.Types.DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: partial_gross_amount
+                  type: java.sql.Types.DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: iva_commission
+                  type: java.sql.Types.DECIMAL(10,4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payment_method
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: term
+                  type: java.sql.Types.INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: installments
+                  type: java.sql.Types.INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: discount
+                  type: java.sql.Types.DECIMAL(10,4)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: next_payment_date
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+

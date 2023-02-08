@@ -1,0 +1,74 @@
+# This is the Gradle build system for JVM applications
+# https://gradle.org/
+# https://github.com/gradle/gradle
+
+image: gradle:alpine
+stages:
+  - quality
+  - build
+  - publish_snapshot
+  - publish_release
+
+# Disable the Gradle daemon for Continuous Integration servers as correctness
+# is usually a priority over speed in CI environments. Using a fresh
+# runtime for each build is more reliable since the runtime is completely
+# isolated from any previous builds.
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+sonarqube-check:
+  stage: quality
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - .gradle
+      - build
+  script: ./gradlew sonarqube -Dsonar.qualitygate.wait=true
+  allow_failure: true
+  artifacts:
+    when: always
+    reports:
+      junit: build/test-results/test/**/TEST-*.xml
+
+build:
+  stage: build
+  script:
+    - ./gradlew --build-cache assemble
+    - echo "APP_NAME=$(./gradlew properties --console=plain -q | grep '^name:' | sed -e 's/\w*:\s//g')" >> build.env
+    - echo "APP_VERSION=$(./gradlew properties --console=plain -q | grep '^version:' | sed -e 's/\w*:\s//g')" >> build.env
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - build
+      - .gradle
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    reports:
+      dotenv: build.env
+
+publishRelease:
+  stage: publish_release
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+      allow_failure: true
+  script:
+    - ./gradlew publish -DPUBLISH_REPOSITORY=https://nexus.tools.menta.global/repository/maven-releases -DPUBLISH_USERNAME=developers -DPUBLISH_PASSWORD=$CI_VARIABLE_NEXUS_PASS -DPUBLISH_TARGET=RELEASE
+
+publishSnapshot:
+  stage: publish_snapshot
+  rules:
+    - if: '$CI_COMMIT_BRANCH != "main"'
+      when: on_success
+      allow_failure: true
+  script:
+    - ./gradlew publish -DPUBLISH_REPOSITORY=https://nexus.tools.menta.global/repository/maven-snapshots -DPUBLISH_USERNAME=developers -DPUBLISH_PASSWORD=$CI_VARIABLE_NEXUS_PASS -DPUBLISH_TARGET=SNAPSHOT

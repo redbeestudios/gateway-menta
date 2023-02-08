@@ -1,0 +1,103 @@
+spring.application.name: api-transactions
+
+spring:
+  cloud:
+    config:
+      import-check:
+        enabled: false
+  jackson:
+    date-format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: NON_NULL
+    deserialization:
+      ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
+  kafka:
+    bootstrap-servers: ${KAFKA_SERVERS}
+    listener:
+      ack-mode: "manual_immediate"
+      missing-topics-fatal: false
+    consumer:
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  datasource:
+    url: jdbc:mariadb://${MYSQL_HOST}:3306/${MYSQL_DB}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASS}
+    driver-class-name: org.mariadb.jdbc.Driver
+    initialization-mode: always
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+        jdbc:
+          time_zone: UTC
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:db/liquibase-changelog.yml
+    enabled: true
+
+springdoc:
+  api-docs:
+    path: ${APP_PATH}/swagger-ui/api-docs
+  swagger-ui:
+    path: ${APP_PATH}/index.html
+
+event:
+  topic:
+    payment:
+      created: created.payment
+    bill-payment:
+      created: created.bill-payment
+    annulment:
+      created: created.annulments
+    refund:
+      created: created.refund
+    bill-refund:
+      created: created.bill-refund
+    reversal:
+      created: created.reversal
+  group:
+      created: create.transactions
+      update: update.operation.reversal
+
+management:
+  health:
+    db:
+      enabled: false
+
+elastic:
+  apm:
+    enabled: true
+    server-url: ${ELASTIC_CLOUD_URL}
+    service-name: ${ELASTIC_CLOUD_TAG_APP}
+    secret-token: ${ELASTIC_CLOUD_TOKEN}
+    environment: ${ELASTIC_CLOUD_TAG_ENV}
+    application-packages: com.menta.api.transactions
+    log-level: ERROR
+
+libs:
+  security:
+    resource-server:
+      issuers:
+        - name: "merchant"
+          uri: "https://cognito-idp.${AWS_REGION}.amazonaws.com/${COGNITO_AWS_MERCHANT_POOL}"
+          authorities-claim-key: "cognito:groups"
+        - name: "customer"
+          uri: "https://cognito-idp.${AWS_REGION}.amazonaws.com/${COGNITO_AWS_CUSTOMER_POOL}"
+          authorities-claim-key: "cognito:groups"
+        - name: "support"
+          uri: "https://cognito-idp.${AWS_REGION}.amazonaws.com/${COGNITO_AWS_SUPPORT_POOL}"
+          authorities-claim-key: "cognito:groups"
+    requester-user:
+      provider:
+        enabled: true
+    ownership:
+        enabled: true
+    ignore-paths:
+      - '/{path:^(?!(public)).*$}/**'

@@ -1,0 +1,16 @@
+<channel-adaptor name='jpos-channel' class="org.jpos.q2.iso.ChannelAdaptor"
+                 logger="Q2">
+    <channel class="org.jpos.iso.channel.BASE24TCPChannel"
+             packager="org.jpos.iso.packager.GenericPackager"
+             logger="Q2"
+             header="ISO">
+        <property name="packager-config" value="cfg/packager/credibanco.xml"/>
+        <property file="cfg/jpos-config.yml" env="true"/>
+        <property name="host"/>
+        <property name="port"/>
+    </channel>
+    <in>jpos-send</in>
+    <out>jpos-receive</out>
+    <reconnect-delay>1000</reconnect-delay>
+</channel-adaptor>
+

@@ -1,0 +1,100 @@
+spring:
+  application:
+    name: bff-devices-login
+  cloud:
+    config:
+      import-check:
+        enabled: false
+  jackson:
+    date-format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: NON_NULL
+    deserialization:
+      ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
+springdoc:
+  api-docs:
+    path: ${APP_PATH}/swagger-ui/api-docs
+  swagger-ui:
+    path: ${APP_PATH}/index.html
+
+externals:
+  host:
+    internal: "api-internal.dev.apps.menta.global"
+    external: "api.dev.apps.menta.global"
+  scheme: "https://"
+  entities:
+    customers:
+      url: "${externals.scheme}${externals.host.internal}${externals.entities.customers.path}"
+      request-timeout: 2500
+      path: "/customers"
+    terminals:
+      url: "${externals.scheme}${externals.host.internal}${externals.entities.terminals.path}"
+      request-timeout: 2500
+      path: "/terminals"
+    merchants:
+      url: "${externals.scheme}${externals.host.internal}${externals.entities.merchants.path}"
+      request-timeout: 2500
+      path: "/merchants"
+    merchants-taxes-entities:
+      url: "${externals.scheme}${externals.host.internal}${externals.entities.merchants-taxes-entities.path}"
+      request-timeout: 2500
+      path: "/taxes-entities/merchant"
+    users:
+      url: "${externals.scheme}${externals.host.internal}${externals.entities.users.path}"
+      request-timeout: 3000
+      path: "/users"
+    workflows:
+      url: "${externals.scheme}${externals.host.external}${externals.entities.workflows.path}"
+      request-timeout: 3000
+      path: "/workflows"
+    acquirers:
+      url: "${externals.scheme}${externals.host.external}${externals.entities.acquirers.path}"
+      request-timeout: 2500
+      path: "/acquirers"
+    installments:
+      url: "${externals.scheme}${externals.host.external}${externals.entities.installments.path}"
+      request-timeout: 3000
+      path: "/installments"
+    acquirers-tags:
+      url: "${externals.scheme}${externals.host.external}${externals.entities.acquirers-tags.path}"
+      request-timeout: 2500
+      path: "/acquirers-tags"
+    device-flows:
+      url: "${externals.scheme}${externals.host.external}${externals.entities.device-flows.path}"
+      request-timeout: 3000
+      path: "/device-flows"
+  login:
+    auth:
+      url: "${externals.scheme}${externals.host.external}${externals.login.auth.path}"
+      request-timeout: 3000
+      path: "/login"
+    refresh:
+      url: "${externals.scheme}${externals.host.external}${externals.login.refresh.path}"
+      request-timeout: 3000
+      path: "/login/refresh"
+    revoke.token:
+      url: "${externals.scheme}${externals.host.external}${externals.login.revoke.token.path}"
+      request-timeout: 3000
+      path: "/login/token/revoke"
+    challenge:
+      url: "${externals.scheme}${externals.host.external}${externals.login.challenge.path}"
+      request-timeout: 3000
+      path: "/login/challenge_solutions/new_password_required"
+
+elastic:
+  apm:
+    enabled: true
+    server-url: ${ELASTIC_CLOUD_URL}
+    service-name: ${ELASTIC_CLOUD_TAG_APP}
+    secret-token: ${ELASTIC_CLOUD_TOKEN}
+    environment: ${ELASTIC_CLOUD_TAG_ENV}
+    application-packages: com.menta.bff.devices.login
+    log-level: ERROR
+
+reactor:
+  netty:
+    pool:
+      maxIdleTime: 20000
+      maxLifeTime: 45000
+      pendingAcquireTimeout: 60000
+      evictInBackground: 120000

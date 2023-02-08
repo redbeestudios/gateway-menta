@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: addColumn-type
+      author: Francisco Gonzalez
+      changes:
+        - addColumn:
+            tableName: operations
+            columns:
+              - column:
+                  name: origin
+                  type: java.sql.Types.VARCHAR(10)
+                  defaultValue: ACQUIRER
+                  afterColumn: ticket_id
+                  constraints:
+                    nullable: true

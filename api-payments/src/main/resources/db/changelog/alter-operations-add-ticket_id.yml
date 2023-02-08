@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: addColumn-type
+      author: Francisco Gonzalez
+      changes:
+        - addColumn:
+            tableName: operations
+            columns:
+              - column:
+                  name: ticket_id
+                  type: INT
+                  afterColumn: acquirer_id
+                  constraints:
+                    nullable: true

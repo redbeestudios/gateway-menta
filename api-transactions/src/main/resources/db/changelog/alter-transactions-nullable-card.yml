@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: dropNotNullConstraint-card
+      author: franco.scolari
+      changes:
+        - dropNotNullConstraint:
+            columnDataType: java.sql.Types.VARCHAR(255)
+            columnName: card_type
+            tableName: transactions
+        - dropNotNullConstraint:
+            columnDataType: java.sql.Types.VARCHAR(255)
+            columnName: card_mask
+            tableName: transactions
+        - dropNotNullConstraint:
+            columnDataType: java.sql.Types.VARCHAR(255)
+            columnName: holder_name
+            tableName: transactions
+        - dropNotNullConstraint:
+            columnDataType: java.sql.Types.VARCHAR(255)
+            columnName: holder_document
+            tableName: transactions
+        - dropNotNullConstraint:
+            columnDataType: java.sql.Types.VARCHAR(255)
+            columnName: card_brand
+            tableName: transactions
+        - dropNotNullConstraint:
+            columnDataType: java.sql.Types.VARCHAR(255)
+            columnName: card_bank
+            tableName: transactions

@@ -1,0 +1,15 @@
+databaseChangeLog:
+- include:
+    file: db/changelog/create-tax-customer.yml
+- include:
+    file: db/changelog/create-tax-merchant.yml
+- include:
+    file: db/changelog/create-taxed-operation.yml
+- include:
+    file: db/changelog/create-tax-rule.yml
+- include:
+    file: db/changelog/create-merchant-tax-rule.yml
+- include:
+      file: db/changelog/create-customer-tax-rule.yml
+
+

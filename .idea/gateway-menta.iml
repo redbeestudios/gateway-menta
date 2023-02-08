@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.idea/ZeppelinRemoteNotebooks" />
+      <excludeFolder url="file://$MODULE_DIR$/api-acquirers/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-banorte-adapter/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-batch-closes/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-batch-closes/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-credibanco-adapter/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-credibanco-adapter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-customers/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-customers/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-feenicia-adapter/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-gps-adapter/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-gps-adapter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-login/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-merchants/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-merchants/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-payments/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-payments/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-reimbursments/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-reimbursments/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-reversals/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-reversals/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-reverse/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-reverse/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-secrets/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-secrets/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-seed/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-taxed-operations/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-taxes-entities/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-taxes-entities/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-terminals/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-terminals/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-transactions/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-transactions/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-users/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/api-users/build" />
+      <excludeFolder url="file://$MODULE_DIR$/api-users-authorities/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/bff-devices-login/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/libs-security/.gradle" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: addColumn-type
+      author: Sebastian Martinez
+      changes:
+        - addColumn:
+            tableName: transactions
+            columns:
+              - column:
+                  name: type
+                  type: java.sql.Types.VARCHAR(25)
+                  constraints:
+                    nullable: false

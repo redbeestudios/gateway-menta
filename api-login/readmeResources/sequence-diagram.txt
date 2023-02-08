@@ -1,0 +1,29 @@
+title api-login
+
+
+participant device
+participant api-login
+participant cognito
+
+==login==
+device->api-login: POST: /login
+api-login->cognito: sdk: initiateAuth
+api-login<-cognito: jwt
+device<-api-login: jwt
+
+==refresh==
+device->api-login: POST: /login/refresh
+api-login->cognito: sdk: initiateAuth
+api-login<-cognito: jwt
+device<-api-login: jwt
+
+==challenge==
+device->api-login: POST: /login
+api-login->cognito: sdk: initiateAuth
+api-login<-cognito: challenge
+device<-api-login: challenge
+
+device->api-login: POST: /login/challenge_solutions/new_password_required
+api-login->cognito: sdk: respondToAuthChallenge
+api-login<-cognito: jwt
+device<-api-login: jwt

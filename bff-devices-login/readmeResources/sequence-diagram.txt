@@ -1,0 +1,21 @@
+title bff-devices-login
+
+
+participant device
+participant bff-devices-login
+participant api-login
+participant api-customers
+participant api-merchants
+participant api-terminals
+
+==login==
+device->bff-devices-login: POST: /login
+bff-devices-login->api-login: POST /public/login
+bff-devices-login<-api-login: idToken
+bff-devices-login->api-terminals: GET /terminals?serialCode={serialCode}
+bff-devices-login<-api-terminals: terminal?
+bff-devices-login->api-customers: GET /customers/{id}
+bff-devices-login<-api-customers: customer?
+bff-devices-login->api-merchants: GET /merchants/{id}
+bff-devices-login<-api-merchants: merchant?
+bff-devices-login<-device: token + terminal? + merchant? + customer?

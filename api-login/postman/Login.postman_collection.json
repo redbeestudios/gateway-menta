@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "5609868d-de2f-437f-98d7-ae457aebf503",
+		"name": "Login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3958509"
+	},
+	"item": [
+		{
+			"name": "challenge-required",
+			"item": [
+				{
+					"name": "challenge-required / Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.to.have.status(200)) {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.test(\"Challenge field should be present\", function () {    ",
+									"        pm.expect(jsonData.challenge).to.not.be.undefined;",
+									"    });",
+									"",
+									"    pm.test(\"Token field should not be present\", function() {",
+									"        pm.expect(jsonData.token).to.be.undefined;",
+									"    });",
+									"",
+									"    pm.test(\"Challenge should be NEW_PASSWORD_REQUIRED\", function() {",
+									"        pm.expect(jsonData.challenge.name).to.be.eq(\"NEW_PASSWORD_REQUIRED\");",
+									"    });",
+									"",
+									"    pm.globals.set(\"global.challenge-required.session\", jsonData.challenge.session);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"{{challenge-required.user}}\",\n    \"password\": \"{{challenge-required.base-password}}\",\n    \"user_type\": \"{{challenge-required.user-type}}\"    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/public/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"public",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "challenge-required / Solve Challenge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.to.have.status(200)) {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.test(\"Challenge field should not be present\", function () {    ",
+									"        pm.expect(jsonData.challenge).to.be.undefined;",
+									"    });",
+									"",
+									"    pm.test(\"Token field should be present\", function() {",
+									"        pm.expect(jsonData.token).to.not.be.undefined;",
+									"    });",
+									"",
+									"    pm.test(\"IdToken should be string\", function() {",
+									"        pm.expect(jsonData.id_token).to.be.string;",
+									"    });",
+									"",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"{{challenge-required.user}}\",\n    \"user_type\": \"{{challenge-required.user-type}}\",\n    \"session\": \"{{global.challenge-required.session}}\",\n    \"new_password\": \"{{challenge-required.new-password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/public/login/challenge_solutions/new_password_required",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"public",
+								"login",
+								"challenge_solutions",
+								"new_password_required"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "challenge-required / Login new password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.to.have.status(200)) {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.test(\"Challenge field should not be present\", function () {    ",
+									"        pm.expect(jsonData.challenge).to.be.undefined;",
+									"    });",
+									"",
+									"    pm.test(\"Token field should be present\", function() {",
+									"        pm.expect(jsonData.token).to.not.be.undefined;",
+									"    });",
+									"",
+									"    pm.test(\"IdToken should be string\", function() {",
+									"        pm.expect(jsonData.id_token).to.be.string;",
+									"    });",
+									"",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"{{challenge-required.user}}\",\n    \"password\": \"{{challenge-required.new-password}}\",\n    \"user_type\": \"{{challenge-required.user-type}}\"    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/public/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"public",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "refresh",
+			"item": [
+				{
+					"name": "refresh / LogIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.to.have.status(200)) {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.test(\"Challenge field should not be present\", function () {    ",
+									"        pm.expect(jsonData.challenge).to.be.undefined;",
+									"    });",
+									"",
+									"    pm.test(\"Token field should be present\", function() {",
+									"        pm.expect(jsonData.token).to.not.be.undefined;",
+									"    });",
+									"",
+									"    pm.test(\"IdToken should be string\", function() {",
+									"        pm.expect(jsonData.id_token).to.be.string;",
+									"    });",
+									"",
+									"    pm.globals.set(\"global.refresh.refresh-token\", jsonData.token.refresh_token);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"{{refresh.user}}\",\n    \"password\": \"{{refresh.password}}\",\n    \"user_type\": \"{{refresh.user-type}}\"    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/public/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"public",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh / Refresh",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.to.have.status(200)) {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.test(\"Challenge field should not be present\", function () {    ",
+									"        pm.expect(jsonData.challenge).to.be.undefined;",
+									"    });",
+									"",
+									"    pm.test(\"Token field should be present\", function() {",
+									"        pm.expect(jsonData.token).to.not.be.undefined;",
+									"    });",
+									"",
+									"    pm.test(\"refresh_token field should not be present\", function () {    ",
+									"        pm.expect(jsonData.token.refresh_token).to.be.undefined;",
+									"    });",
+									"",
+									"    pm.test(\"IdToken should be string\", function() {",
+									"        pm.expect(jsonData.id_token).to.be.string;",
+									"    });",
+									"",
+									"    pm.globals.set(\"global.refresh.refreshed-id-token\", jsonData.token.id_token);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_type\": \"{{refresh.user-type}}\",\n    \"refresh_token\": \"{{global.refresh.refresh-token}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/public/login/refresh",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"public",
+								"login",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

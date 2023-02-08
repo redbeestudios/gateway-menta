@@ -1,0 +1,16 @@
+<channel-adaptor name='jpos-channel' class="org.jpos.q2.iso.ChannelAdaptor"
+                 logger="Q2">
+    <channel class="com.kiwi.api.payments.adapter.jpos.channel.AChannel"
+             packager="org.jpos.iso.packager.GenericPackager"
+             logger="Q2"
+             header="92C7C">
+        <property name="packager-config" value="cfg/packager/gps.xml"/>
+        <property file="cfg/jpos-config.yml" env="true"/>
+        <property name="host"/>
+        <property name="port"/>
+    </channel>
+    <in>jpos-send</in>
+    <out>jpos-receive</out>
+    <reconnect-delay>1000</reconnect-delay>
+</channel-adaptor>
+

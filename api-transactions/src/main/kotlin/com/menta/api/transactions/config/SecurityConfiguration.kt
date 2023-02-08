@@ -1,0 +1,15 @@
+package com.menta.api.transactions.config
+
+import com.menta.api.transactions.shared.error.ErrorHandler
+import com.menta.api.transactions.shared.error.model.ApiErrorResponse
+import com.menta.libs.security.SecurityErrorHandler
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+
+@Configuration
+class SecurityConfiguration {
+
+    @Bean
+    fun securityErrorHandler(handler: ErrorHandler): SecurityErrorHandler<ApiErrorResponse> =
+        SecurityErrorHandler { handler.handleSecurityException(it) }
+}

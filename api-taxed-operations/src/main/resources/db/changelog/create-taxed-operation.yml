@@ -1,0 +1,85 @@
+databaseChangeLog:
+  - changeSet:
+      id: taxed-operation
+      author: nicolas.ocampo
+      changes:
+        - createTable:
+            tableName: taxed_operation
+            columns:
+              - column:
+                  name: id
+                  type: java.sql.Types.INTEGER
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: payment_id
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: terminal_id
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: merchant_id
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gross_amount
+                  type: java.sql.Types.VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_datetime
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: installments
+                  type: java.sql.Types.VARCHAR(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: tax_customer_id
+                  type: java.sql.Types.INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_merchant_id
+                  type: java.sql.Types.INTEGER
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: taxed_operation_tax_customer_id_fk
+      author: nicolas.ocampo
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: tax_customer_id
+            baseTableName: taxed_operation
+            constraintName: fk_taxed_operation_tax_customer
+            referencedColumnNames: id
+            referencedTableName: tax_customer
+  - changeSet:
+      id: taxed_operation_tax_merchant_id_fk
+      author: nicolas.ocampo
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: tax_merchant_id
+            baseTableName: taxed_operation
+            constraintName: fk_taxed_operation_tax_merchant
+            referencedColumnNames: id
+            referencedTableName: tax_merchant

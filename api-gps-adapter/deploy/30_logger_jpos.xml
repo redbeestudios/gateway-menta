@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<logger name="Q2" class="org.jpos.q2.qbean.LoggerAdaptor">
+    <log-listener class="org.jpos.util.ProtectedLogListener">
+        <property name="protect" value="2" />
+    </log-listener>
+    <log-listener class="org.jpos.util.ProtectedLogListener">
+        <property name="protect" value="14" />
+    </log-listener>
+    <log-listener class="org.jpos.util.ProtectedLogListener">
+        <property name="protect" value="35" />
+    </log-listener>
+    <log-listener class="org.jpos.util.ProtectedLogListener">
+        <property name="protect" value="45" />
+    </log-listener>
+    <log-listener class="org.jpos.util.ProtectedLogListener">
+        <property name="protect" value="52" />
+    </log-listener>
+    <log-listener class="org.jpos.util.ProtectedLogListener">
+        <property name="protect" value="53" />
+    </log-listener>
+    <log-listener class="org.jpos.util.ProtectedLogListener">
+        <property name="protect" value="55" />
+    </log-listener>
+    <log-listener class="com.kiwi.api.payments.config.SLF4JListener"/>
+</logger>

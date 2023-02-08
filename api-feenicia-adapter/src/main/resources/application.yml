@@ -1,0 +1,57 @@
+spring.application.name: api-feenicia-adapter
+
+spring:
+  cloud:
+    config:
+      import-check:
+        enabled: false
+  jackson:
+    date-format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: NON_NULL
+    deserialization:
+      ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
+
+springdoc:
+  api-docs:
+    path: ${APP_PATH}/swagger-ui/api-docs
+  swagger-ui:
+    path: ${APP_PATH}/index.html
+
+api-feenicia-adapter:
+  host: "www.feenicia.net"
+  url:
+    emv: "https://${api-feenicia-adapter.host}/v1/atna/sale/oneStepSaleEmv"
+    swipe: "https://${api-feenicia-adapter.host}/v1/atna/sale/oneStepSaleSwipe"
+    refund: "https://${api-feenicia-adapter.host}/v1/atna/refundById"
+    reversal: "https://${api-feenicia-adapter.host}/v1/atna/reversal"
+    cancel: "https://${api-feenicia-adapter.host}/v1/atna/cancel/cancelById"
+  timeout: 25500
+  properties:
+    description: "MontoFijo"
+    responseIv: ${REQUEST_IV}
+    responseKey: ${REQUEST_KEY}
+
+  aes:
+    encoding: "ISO-8859-1"
+    mode: "AES/CBC/PKCS7Padding"
+
+externals:
+  host: "api-internal.dev.apps.menta.global"
+  scheme: "https://"
+  entities:
+    acquirer:
+      feenicia-merchants:
+        path: "/feenicia-entities/merchants/{merchantId}"
+        url: "${externals.scheme}${externals.host}${externals.entities.acquirer.feenicia-merchants.path}"
+        request-timeout: 5000
+
+elastic:
+  apm:
+    enabled: true
+    server-url: ${ELASTIC_CLOUD_URL}
+    service-name: ${ELASTIC_CLOUD_TAG_APP}
+    secret-token: ${ELASTIC_CLOUD_TOKEN}
+    environment: ${ELASTIC_CLOUD_TAG_ENV}
+    application-packages: com.menta.api.feenicia
+    log-level: ERROR

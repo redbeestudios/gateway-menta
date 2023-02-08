@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: addColumn-status
+      author: Francisco Gonzalez
+      changes:
+        - addColumn:
+            tableName: operations
+            columns:
+              - column:
+                  name: status
+                  type: java.sql.Types.VARCHAR(25)
+                  defaultValue: APPROVED
+                  constraints:
+                    nullable: false
